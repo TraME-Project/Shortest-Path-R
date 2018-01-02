@@ -50,7 +50,9 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
             double distance_through_u = dist + node_iter.weight;
 
 	        if (distance_through_u < min_distance[v]) {
-                vertex_queue.erase(std::make_pair(min_distance[v], v));
+                if (min_distance[v] != max_weight) { // avoid spurious search
+                    vertex_queue.erase(std::make_pair(min_distance[v], v));
+                }
     
                 min_distance[v] = std::move(distance_through_u);
                 path_list[v] = u;
