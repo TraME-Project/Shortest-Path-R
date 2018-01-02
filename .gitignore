@@ -10,8 +10,6 @@ Makefile
 *.so
 *.test
 *.vscode
-include/armadillo*
-glpk_tmp
 *.gcda
 *.gcno
 *.gcov
