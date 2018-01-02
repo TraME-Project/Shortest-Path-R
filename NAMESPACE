@@ -1,0 +1,5 @@
+useDynLib(SPR)
+
+importFrom(Rcpp, evalCpp)
+
+exportPattern("^[[:alpha:]]+")
