@@ -26,8 +26,10 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
 {
     try {
         sp::graph_t arc_list;
-        arma::mat arcs_mat = as<arma::mat>(arcs_R);
-        arcs_mat.cols(0,1) -= 1; 
+        arma::mat arcs_mat( REAL(arcs_R), Rf_nrows(arcs_R), Rf_ncols(arcs_R), false, true );
+
+        // arma::mat arcs_mat = as<arma::mat>(arcs_R);
+        // arcs_mat.cols(0,1) -= 1; 
 
         sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
 
@@ -42,7 +44,22 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
             path_list[i]++;
         }
 
-        return Rcpp::List::create(Rcpp::Named("solution") = min_distance,Rcpp::Named("sol_path") = path_list);
+        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance,Rcpp::Named("path_list") = path_list);
+    } catch( std::exception &ex ) {
+        forward_exception_to_r( ex );
+    } catch(...) {
+        ::Rf_error( "trame: C++ exception (unknown reason)" );
+    }
+    return R_NilValue;
+}
+
+SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R)
+{
+    try {
+
+        std::list<int> opt_path = sp::dijkstra::get_shortest_path(as<int>(dest_ind_R), as< std::vector<int> > (path_list_R));
+
+        return wrap(opt_path);
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {

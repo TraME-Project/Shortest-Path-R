@@ -62,11 +62,11 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
 }
  
 std::list<int>
-sp::dijkstra::get_shortest_path(int vertex, const std::vector<int>& path_list)
+sp::dijkstra::get_shortest_path(int vertex, const std::vector<int>& path_list, const int min_vertex_val)
 {
     std::list<int> path;
 
-    for ( ; vertex != -1; vertex = path_list[vertex]) {
+    for ( ; vertex != min_vertex_val; vertex = path_list[vertex]) {
         path.push_front(vertex);
     }
 

@@ -14,4 +14,6 @@ arcs_mat <- rbind(c(1,2,7),
                   c(4,5,6),
                   c(5,6,9))
 
-dijkstra(n,source_ind,arcs_mat)
+sol <- dijkstra(n,source_ind,arcs_mat)
+
+get_shortest_path(5,sol$path_list)
