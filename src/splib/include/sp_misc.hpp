@@ -16,32 +16,20 @@
   ##
   ################################################################################*/
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <list>
- 
-#include <limits>
- 
-#include <set>
-#include <utility>
-#include <algorithm>
-#include <iterator>
+inline
+void
+arma_to_graph(const int n_vert, arma::mat& arc_mat, graph_t& node_list)
+{
+    // const int k = graph_mat.n_cols;
 
-#ifdef USE_RCPP_ARMADILLO
-    #include <RcppArmadillo.h>
-#else
-    #ifndef ARMA_DONT_USE_WRAPPER
-        #define ARMA_DONT_USE_WRAPPER
-    #endif
-    #include "armadillo"
-#endif
+    node_list.clear();
+    node_list.resize(n_vert);
 
-namespace sp {
+    for (int i=0; i < static_cast<int>(arc_mat.n_rows); i++) {
+        int src_ind  = std::move(arc_mat(i,0)); // source
+        int dest_ind = std::move(arc_mat(i,1)); // destination
+        double cost  = std::move(arc_mat(i,2));  // cost
 
-    #include "sp_structs.hpp"
-    #include "sp_misc.hpp"
-
-    #include "dijkstra.hpp"
-
+        node_list[src_ind].push_back({std::move(dest_ind), std::move(cost)});
+    }
 }

@@ -19,14 +19,13 @@
 ##
 ################################################################################
 
-dijkstra <- function(n,source_ind,arcs_mat)
+get_shortest_path <- function(dest_ind,path_list)
 {
 
-    arcs_mat[,1:2] <- arcs_mat[,1:2] - 1 # adjust for zero indexing
+    dest_ind <- dest_ind - 1   # adjust for zero indexing
+    path_list <- path_list - 1 # adjust for zero indexing
 
-    res <- .Call("dijkstra_R", n,source_ind-1,arcs_mat, PACKAGE = "SPR")
+    res <- .Call("get_shortest_path_R", dest_ind,path_list, PACKAGE = "SPR")
 
-    #
-
-    return(res)
+    return(res+1)
 }
