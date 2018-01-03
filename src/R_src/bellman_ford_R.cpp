@@ -22,7 +22,7 @@
 #include "SPR.hpp"
 using namespace Rcpp;
 
-SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
+SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
 {
     try {
         sp::graph_t arc_list;
@@ -36,7 +36,7 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
         std::vector<double> min_distance;
         std::vector<int> path_list;
 
-        sp::dijkstra::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list);
+        sp::bellman_ford::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list);
 
         //
 

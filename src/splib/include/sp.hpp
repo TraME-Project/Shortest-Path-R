@@ -42,6 +42,7 @@ namespace sp {
     #include "sp_structs.hpp"
     #include "sp_misc.hpp"
 
+    #include "bellman_ford.hpp"
     #include "dijkstra.hpp"
 
 }

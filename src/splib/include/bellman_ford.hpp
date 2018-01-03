@@ -16,7 +16,7 @@
   ##
   ################################################################################*/
 
-namespace dijkstra {
+namespace bellman_ford {
 
     void compute_paths(const int source_ind, const graph_t& node_list, std::vector<double>& min_distance, std::vector<int>& path_list);
 

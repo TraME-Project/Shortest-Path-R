@@ -16,12 +16,12 @@ CXX_STD = CXX11
 # sources and objects
 
 # core SP files
-SOURCES_SP= $(SP_SRC_DIR)/dijkstra.cpp
+SOURCES_SP= $(SP_SRC_DIR)/bellman_ford.cpp $(SP_SRC_DIR)/dijkstra.cpp
 OBJECTS_SP= $(SOURCES_SP:.cpp=.o)
 
 # modules
 
-SOURCES_R= ./R_src/dijkstra_R.cpp
+SOURCES_R= ./R_src/bellman_ford_R.cpp ./R_src/dijkstra_R.cpp ./R_src/get_shortest_path_R.cpp
 OBJECTS_R= $(SOURCES_R:.cpp=.o)
 
 #

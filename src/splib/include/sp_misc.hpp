@@ -33,3 +33,20 @@ arma_to_graph(const int n_vert, arma::mat& arc_mat, graph_t& node_list)
         node_list[src_ind].push_back({std::move(dest_ind), std::move(cost)});
     }
 }
+
+//
+
+std::list<int> get_shortest_path(int vertex, const std::vector<int>& path_list, const int min_vertex_val = -1);
+
+inline
+std::list<int>
+get_shortest_path(int vertex, const std::vector<int>& path_list, const int min_vertex_val)
+{
+    std::list<int> path;
+
+    for ( ; vertex != min_vertex_val; vertex = path_list[vertex]) {
+        path.push_front(vertex);
+    }
+
+    return path;
+}

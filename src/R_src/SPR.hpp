@@ -19,12 +19,14 @@
   ##
   ################################################################################*/
 
-#ifndef _dijkstra_R_HPP
-#define _dijkstra_R_HPP
+#ifndef _SPR_HPP
+#define _SPR_HPP
 
 #include "sp.hpp"
 
+RcppExport SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R);
 RcppExport SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R);
+
 RcppExport SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R);
 
 #endif

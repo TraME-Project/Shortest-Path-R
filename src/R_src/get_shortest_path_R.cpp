@@ -22,29 +22,13 @@
 #include "SPR.hpp"
 using namespace Rcpp;
 
-SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
+SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R)
 {
     try {
-        sp::graph_t arc_list;
-        arma::mat arcs_mat( REAL(arcs_R), Rf_nrows(arcs_R), Rf_ncols(arcs_R), false, true );
 
-        // arma::mat arcs_mat = as<arma::mat>(arcs_R);
-        // arcs_mat.cols(0,1) -= 1; 
+        std::list<int> opt_path = sp::get_shortest_path(as<int>(dest_ind_R), as< std::vector<int> > (path_list_R));
 
-        sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
-
-        std::vector<double> min_distance;
-        std::vector<int> path_list;
-
-        sp::dijkstra::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list);
-
-        //
-
-        for (int i=0; i < path_list.size(); i++) {
-            path_list[i]++;
-        }
-
-        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance,Rcpp::Named("path_list") = path_list);
+        return wrap(opt_path);
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {
