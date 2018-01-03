@@ -41,7 +41,7 @@ sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, 
                 //
                 if (dist_mat[i-1][j] < dist_mat[i][j]) {
                     dist_mat[i][j] = dist_mat[i-1][j];
-                    // path_mat[i][j] = path_mat[i-1][j];
+                    path_mat[i][j] = path_mat[i-1][j];
                 }
 
                 for (auto &node_iter : node_list[j])
