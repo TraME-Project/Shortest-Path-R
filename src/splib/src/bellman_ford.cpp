@@ -16,9 +16,6 @@
   ##
   ################################################################################*/
 
-// modified verion of MIT-licensed code here:
-// https://rosettacode.org/wiki/Dijkstra%27s_algorithm#C.2B.2B
-
 #include "sp.hpp"
 
 //
@@ -37,16 +34,18 @@ sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, 
     {
         for (int j=0; j < n; j++)
         {
-            if (dist_mat[i-1][j] != max_weight) {
-                //
-                if (dist_mat[i-1][j] < dist_mat[i][j]) {
+            if (dist_mat[i-1][j] != max_weight) 
+            {
+                if (dist_mat[i-1][j] < dist_mat[i][j]) 
+                {
                     dist_mat[i][j] = dist_mat[i-1][j];
                     path_mat[i][j] = path_mat[i-1][j];
                 }
 
                 for (auto &node_iter : node_list[j])
                 {
-                    if (dist_mat[i-1][j] + node_iter.weight < dist_mat[i][node_iter.index]) {
+                    if (dist_mat[i-1][j] + node_iter.weight < dist_mat[i][node_iter.index]) 
+                    {
                         dist_mat[i][node_iter.index] = dist_mat[i-1][j] + node_iter.weight;
                         path_mat[i][node_iter.index] = j;
                     }

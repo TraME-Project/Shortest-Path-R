@@ -29,12 +29,12 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
     int n = node_list.size();
 
     min_distance.resize(n, max_weight);
-    min_distance[source_ind] = 0;
+    min_distance[source_ind] = 0.0;
 
     path_list.resize(n, -1);
 
     std::set<std::pair<double, int>> vertex_queue;
-    vertex_queue.insert(std::make_pair(min_distance[source_ind], source_ind));
+    vertex_queue.insert(std::make_pair(0.0, source_ind));
  
     while (!vertex_queue.empty())
     {
@@ -49,8 +49,10 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
 
             double distance_through_u = dist + node_iter.weight;
 
-	        if (distance_through_u < min_distance[v]) {
-                if (min_distance[v] != max_weight) { // avoid spurious search
+            if (distance_through_u < min_distance[v]) 
+            {
+                if (min_distance[v] != max_weight) 
+                { // avoid spurious search
                     vertex_queue.erase(std::make_pair(min_distance[v], v));
                 }
     
