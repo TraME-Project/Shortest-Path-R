@@ -22,9 +22,9 @@
 bellman_ford <- function(n_nodes,source_ind,arcs_matrix)
 {
 
-    arcs_mat[,1:2] <- arcs_mat[,1:2] - 1 # adjust for zero indexing
+    arcs_matrix[,1:2] <- arcs_matrix[,1:2] - 1 # adjust for zero indexing
 
-    res <- .Call("bellman_ford_R", n,source_ind-1,arcs_mat, PACKAGE = "SPR")
+    res <- .Call("bellman_ford_R", n_nodes,source_ind-1,arcs_matrix, PACKAGE = "SPR")
 
     #
 
