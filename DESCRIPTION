@@ -1,8 +1,8 @@
 Package: SPR
 Type: Package
 Title: Shortest Path-R
-Version: 1.0.0
-Date: 2018-01-02
+Version: 1.1.0
+Date: 2018-01-14
 Author: Keith O'Hara [aut, cre]
 Maintainer: Keith O'Hara <keith.ohara@nyu.edu>
 Description: A package to compute shortest paths in a sparse graph.
