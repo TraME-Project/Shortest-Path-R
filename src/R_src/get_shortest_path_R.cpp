@@ -32,7 +32,7 @@ SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R)
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {
-        ::Rf_error( "trame: C++ exception (unknown reason)" );
+        ::Rf_error( "SPR: C++ exception (unknown reason)" );
     }
     return R_NilValue;
 }

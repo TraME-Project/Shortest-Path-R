@@ -48,7 +48,7 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {
-        ::Rf_error( "trame: C++ exception (unknown reason)" );
+        ::Rf_error( "SPR: C++ exception (unknown reason)" );
     }
     return R_NilValue;
 }
