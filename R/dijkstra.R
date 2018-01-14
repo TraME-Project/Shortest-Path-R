@@ -19,7 +19,7 @@
 ##
 ################################################################################
 
-dijkstra <- function(n,source_ind,arcs_mat)
+dijkstra <- function(n_nodes,source_ind,arcs_matrix)
 {
 
     arcs_mat[,1:2] <- arcs_mat[,1:2] - 1 # adjust for zero indexing

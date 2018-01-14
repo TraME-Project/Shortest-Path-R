@@ -1,0 +1,6 @@
+.travis.yml
+.git
+.DS_Store
+appveyor.yml
+LICENSE
+README.md
