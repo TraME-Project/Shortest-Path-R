@@ -1,4 +1,4 @@
-# Shortest Path-R (SPR) &nbsp; [![Build Status](https://travis-ci.org/TraME-Project/Shortest-Path-R.svg?branch=master)](https://travis-ci.org/TraME-Project/Shortest-Path-R) [![Build status](https://ci.appveyor.com/api/projects/status/github/TraME-Project/Shortest-Path-R?branch=master)](https://ci.appveyor.com/project/kthohr/shortest-path-r/branch/master)
+# Shortest Path Algorithms using R (SPR) &nbsp; [![Build Status](https://travis-ci.org/TraME-Project/Shortest-Path-R.svg?branch=master)](https://travis-ci.org/TraME-Project/Shortest-Path-R) [![Build status](https://ci.appveyor.com/api/projects/status/github/TraME-Project/Shortest-Path-R?branch=master)](https://ci.appveyor.com/project/kthohr/shortest-path-r/branch/master)
 
 ### Overview
 

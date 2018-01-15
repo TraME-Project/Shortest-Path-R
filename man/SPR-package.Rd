@@ -5,10 +5,10 @@
 
 \docType{package}
 
-\title{Shortest Path Algorithms with R}
+\title{Shortest Path Algorithms using R}
 
 \description{
-SPR is a package of shortest path algorithms.
+The SPR package is a collection of shortest path algorithms.
 }
 
 \details{
@@ -22,9 +22,9 @@ LazyLoad: \tab Yes\cr
 Depends: \tab Rcpp, RcppArmadillo \cr }
 }
 \section{How to cite this package}{
- \preformatted{@Manual{OHara2015,
+ \preformatted{@Manual{OHara2018,
  author       = {Keith O'Hara},
- title        = {{SPR}: Shortest Path with R.},
+ title        = {{SPR}: Shortest Path Algorithms using R.},
  year         = {2018},
  note         = {R package version 1.1.0.}}}
 \emph{}
