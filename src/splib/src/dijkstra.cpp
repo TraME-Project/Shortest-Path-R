@@ -16,9 +16,6 @@
   ##
   ################################################################################*/
 
-// modified verion of MIT-licensed code here:
-// https://rosettacode.org/wiki/Dijkstra%27s_algorithm#C.2B.2B
-
 #include "sp.hpp"
 
 //
@@ -129,6 +126,9 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
 }
 
 // robust (to negative weights) version
+
+// modified verion of MIT-licensed code here:
+// https://rosettacode.org/wiki/Dijkstra%27s_algorithm#C.2B.2B
 
 void
 sp::dijkstra::compute_paths_robust(const int source_ind, const graph_t& node_list, std::vector<double>& min_distance, std::vector<int>& path_list)
