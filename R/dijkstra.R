@@ -19,12 +19,18 @@
 ##
 ################################################################################
 
-dijkstra <- function(n_nodes,source_ind,arcs_matrix)
+dijkstra <- function(n_nodes,source_ind,arcs_matrix,dest_ind=NULL)
 {
 
     arcs_matrix[,1:2] <- arcs_matrix[,1:2] - 1 # adjust for zero indexing
 
-    res <- .Call("dijkstra_R", n_nodes,source_ind-1,arcs_matrix, PACKAGE = "SPR")
+    res <- list()
+    if (is.null(dest_ind)) {
+        res <- .Call("dijkstra_R", n_nodes,source_ind-1,arcs_matrix, PACKAGE = "SPR")
+    } else {
+        res <- .Call("dijkstra_simp_R", n_nodes,source_ind-1,dest_ind-1,arcs_matrix, PACKAGE = "SPR")
+        res$path_list <- res$path_list + 1 
+    }
 
     #
 

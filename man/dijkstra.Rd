@@ -9,7 +9,7 @@
 }
 
 \usage{
-dijkstra(n_nodes,source_ind,arcs_matrix)
+dijkstra(n_nodes,source_ind,arcs_matrix,dest_ind=NULL)
 }
 
 \arguments{
@@ -19,6 +19,8 @@ dijkstra(n_nodes,source_ind,arcs_matrix)
 	The source node index.}
 	\item{arcs_matrix}{
 	A K x 3 matrix of arcs for the network.}
+    \item{dest_ind}{
+	The destination node index (optional).}
 }
 
 \details{
@@ -26,9 +28,14 @@ dijkstra(n_nodes,source_ind,arcs_matrix)
 }
 
 \value{
-The function returns a list of objects:
-
+The function returns a list of objects. If the destination node is provided,
     \item{min_dist}{
+	The minimum distance solution from the source node to the destination node.}
+	\item{path_list}{
+	The minimum distance path from source_ind to dest_ind.}
+
+If the destination node is not provided,
+\item{min_dist}{
 	A numeric vector containing the minimum distance from the source node to other nodes in the network.}
 	\item{path_list}{
 	The minimum distance path for each node.}

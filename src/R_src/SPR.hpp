@@ -26,6 +26,7 @@
 
 RcppExport SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R);
 RcppExport SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R);
+RcppExport SEXP dijkstra_simp_R(SEXP n_R, SEXP source_ind_R, SEXP dest_ind_R, SEXP arcs_R);
 
 RcppExport SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R);
 

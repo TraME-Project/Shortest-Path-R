@@ -52,3 +52,28 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
     }
     return R_NilValue;
 }
+
+SEXP dijkstra_simp_R(SEXP n_R, SEXP source_ind_R, SEXP dest_ind_R, SEXP arcs_R)
+{
+    try {
+        sp::graph_t arc_list;
+        arma::mat arcs_mat( REAL(arcs_R), Rf_nrows(arcs_R), Rf_ncols(arcs_R), false, true );
+
+        const int dest_ind = as<int>(dest_ind_R);
+
+        sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
+
+        std::vector<double> min_distance;
+        std::vector<int> path_list;
+
+        sp::dijkstra::compute_path(as<int>(source_ind_R), dest_ind, arc_list, min_distance, path_list);
+        std::list<int> opt_path = sp::get_shortest_path(dest_ind, path_list);
+
+        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance[dest_ind],Rcpp::Named("path_list") = opt_path);
+    } catch( std::exception &ex ) {
+        forward_exception_to_r( ex );
+    } catch(...) {
+        ::Rf_error( "SPR: C++ exception (unknown reason)" );
+    }
+    return R_NilValue;
+}
