@@ -36,6 +36,8 @@ sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph
     vertex_queue.insert(std::make_pair(0.0, source_ind));
 
     bool found_dest = false;
+
+    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
  
     while (!found_dest && !vertex_queue.empty())
     {
@@ -74,6 +76,11 @@ sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph
 
         unvisited_set[u] = false;
     }
+
+    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+    std::chrono::duration<double> elapsed_seconds = end-start;
+
+    std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
 }
 
 void

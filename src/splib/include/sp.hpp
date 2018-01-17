@@ -28,6 +28,8 @@
 #include <algorithm>
 #include <iterator>
 
+#include <chrono>
+
 #ifdef USE_RCPP_ARMADILLO
     #include <RcppArmadillo.h>
 #else
