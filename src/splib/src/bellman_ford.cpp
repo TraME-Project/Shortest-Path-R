@@ -21,7 +21,9 @@
 //
 
 void
-sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, std::vector<double>& min_distance, std::vector<int>& path_list)
+sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, 
+                                std::vector<double>& min_distance, std::vector<int>& path_list,
+                                comptime_t* time_spent)
 {
     const int n = node_list.size(); // number of nodes
 
@@ -35,22 +37,26 @@ sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, 
     bool should_cont = true;
     int end_ind = n;
 
+    clocktime_t start_time;
+    if (time_spent) {
+        start_time = tic();
+    }
+
     for (int i=1; i < n + 2; i++)
-    { // relax edges repeatedly
+    {   // relax edges repeatedly
         should_cont = false;
 
         for (int j=0; j < n; j++)
-        { // iterate over nodes
-
+        {   // iterate over nodes
             if (dist_mat[i-1][j] != max_weight) 
-            { // avoid unvisited nodes
+            {   // avoid unvisited nodes
                 if (dist_mat[i-1][j] < dist_mat[i][j]) 
-                { // update with results from previous relaxation
+                {   // update with results from previous relaxation
                     dist_mat[i][j] = dist_mat[i-1][j];
                 }
 
                 for (auto &node_iter : node_list[j])
-                { // iterate over connected nodes
+                {   // iterate over connected nodes
                     if (dist_mat[i][node_iter.index] == max_weight && dist_mat[i-1][node_iter.index] != max_weight)
                     {
                         dist_mat[i][node_iter.index] = dist_mat[i-1][node_iter.index];
@@ -83,6 +89,10 @@ sp::bellman_ford::compute_paths(const int source_ind, const graph_t& node_list, 
         {
             throw "Graph contains negative weight cycle";
         }
+    }
+
+    if (time_spent) {
+        *time_spent = tic() - start_time;
     }
 
     //

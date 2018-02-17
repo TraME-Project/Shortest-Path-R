@@ -35,8 +35,9 @@ SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
 
         std::vector<double> min_distance;
         std::vector<int> path_list;
+        sp::comptime_t algo_runtime;
 
-        sp::bellman_ford::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list);
+        sp::bellman_ford::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list, &algo_runtime);
 
         //
 
@@ -44,7 +45,10 @@ SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
             path_list[i]++;
         }
 
-        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance,Rcpp::Named("path_list") = path_list);
+        double runtime_out = algo_runtime.count();
+
+        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance, Rcpp::Named("path_list") = path_list, 
+                                  Rcpp::Named("elapsed_time") = runtime_out);
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {

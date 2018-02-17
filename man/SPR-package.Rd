@@ -15,8 +15,8 @@ The SPR package is a collection of shortest path algorithms.
 \tabular{ll}{
 Package: \tab SPR\cr
 Type: \tab Package\cr
-Version: \tab 1.1.0\cr
-Date: \tab 2018-01-14\cr
+Version: \tab 1.2.0\cr
+Date: \tab 2018-02-16\cr
 License: \tab GPL (>= 2)\cr
 LazyLoad: \tab Yes\cr
 Depends: \tab Rcpp, RcppArmadillo \cr }
@@ -26,7 +26,7 @@ Depends: \tab Rcpp, RcppArmadillo \cr }
  author       = {Keith O'Hara},
  title        = {{SPR}: Shortest Path Algorithms using R.},
  year         = {2018},
- note         = {R package version 1.1.0.}}}
+ note         = {R package version 1.2.0.}}}
 \emph{}
 }
 

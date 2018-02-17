@@ -35,8 +35,9 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
 
         std::vector<double> min_distance;
         std::vector<int> path_list;
+        sp::comptime_t algo_runtime;
 
-        sp::dijkstra::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list);
+        sp::dijkstra::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list, &algo_runtime);
 
         //
 
@@ -44,7 +45,10 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
             path_list[i]++;
         }
 
-        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance,Rcpp::Named("path_list") = path_list);
+        double runtime_out = algo_runtime.count();
+
+        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance,Rcpp::Named("path_list") = path_list,
+                                  Rcpp::Named("elapsed_time") = runtime_out);
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {
@@ -65,11 +69,15 @@ SEXP dijkstra_simp_R(SEXP n_R, SEXP source_ind_R, SEXP dest_ind_R, SEXP arcs_R)
 
         std::vector<double> min_distance;
         std::vector<int> path_list;
+        sp::comptime_t algo_runtime;
 
-        sp::dijkstra::compute_path(as<int>(source_ind_R), dest_ind, arc_list, min_distance, path_list);
+        sp::dijkstra::compute_path(as<int>(source_ind_R), dest_ind, arc_list, min_distance, path_list, &algo_runtime);
         std::list<int> opt_path = sp::get_shortest_path(dest_ind, path_list);
 
-        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance[dest_ind],Rcpp::Named("path_list") = opt_path);
+        double runtime_out = algo_runtime.count();
+
+        return Rcpp::List::create(Rcpp::Named("min_dist") = min_distance[dest_ind],Rcpp::Named("path_list") = opt_path,
+                                  Rcpp::Named("elapsed_time") = runtime_out);
     } catch( std::exception &ex ) {
         forward_exception_to_r( ex );
     } catch(...) {

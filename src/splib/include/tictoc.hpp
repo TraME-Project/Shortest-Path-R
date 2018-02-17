@@ -16,36 +16,32 @@
   ##
   ################################################################################*/
 
-#include <iostream>
-#include <vector>
-#include <string>
-#include <list>
- 
-#include <limits>
- 
-#include <set>
-#include <utility>
-#include <algorithm>
-#include <iterator>
+/*
+ * simple tictoc functionality
+ */
 
-#include <chrono>
+using clocktime_t = std::chrono::time_point<std::chrono::system_clock>;
+using comptime_t  = std::chrono::duration<double>;
 
-#ifdef USE_RCPP_ARMADILLO
-    #include <RcppArmadillo.h>
-#else
-    #ifndef ARMA_DONT_USE_WRAPPER
-        #define ARMA_DONT_USE_WRAPPER
-    #endif
-    #include "armadillo"
-#endif
+inline
+clocktime_t
+tic()
+{
+    return std::chrono::system_clock::now();
+}
 
-namespace sp {
+inline
+void
+tictoc(clocktime_t time_inp)
+{
+    clocktime_t time_now = std::chrono::system_clock::now();
 
-    #include "sp_structs.hpp"
-    #include "sp_misc.hpp"
-    #include "tictoc.hpp"
+    comptime_t run_time = time_now - time_inp;
 
-    #include "bellman_ford.hpp"
-    #include "dijkstra.hpp"
+    //
 
+    std::time_t end_time = std::chrono::system_clock::to_time_t(time_now);
+        
+    std::cout << "finished computation at " << std::ctime(&end_time)
+              << "total runtime: " << run_time.count() << "s\n";
 }

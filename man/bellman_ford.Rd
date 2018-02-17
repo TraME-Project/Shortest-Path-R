@@ -32,6 +32,8 @@ The function returns a list of objects:
 	A numeric vector containing the minimum distance from the source node to other nodes in the network.}
 	\item{path_list}{
 	The minimum distance path for each node.}
+    \item{elapsed_time}{
+	Runtime of the algorithm.}
 }
 
 \author{Keith O'Hara}

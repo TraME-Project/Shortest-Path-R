@@ -33,12 +33,16 @@ The function returns a list of objects. If the destination node is provided,
 	The minimum distance solution from the source node to the destination node.}
 	\item{path_list}{
 	The minimum distance path from source_ind to dest_ind.}
+    \item{elapsed_time}{
+	Runtime of the algorithm.}
 
 If the destination node is not provided,
 \item{min_dist}{
 	A numeric vector containing the minimum distance from the source node to other nodes in the network.}
 	\item{path_list}{
 	The minimum distance path for each node.}
+    \item{elapsed_time}{
+	Runtime of the algorithm.}
 }
 
 \author{Keith O'Hara}

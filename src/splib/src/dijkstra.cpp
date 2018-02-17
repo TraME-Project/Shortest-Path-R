@@ -21,7 +21,9 @@
 //
 
 void
-sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph_t& node_list, std::vector<double>& min_distance, std::vector<int>& path_list)
+sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph_t& node_list, 
+                           std::vector<double>& min_distance, std::vector<int>& path_list, 
+                           comptime_t* time_spent)
 {
     const int n = node_list.size();
 
@@ -35,9 +37,14 @@ sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph
 
     vertex_queue.insert(std::make_pair(0.0, source_ind));
 
+    //
+
     bool found_dest = false;
 
-    std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+    clocktime_t start_time;
+    if (time_spent) {
+        start_time = tic();
+    }
  
     while (!found_dest && !vertex_queue.empty())
     {
@@ -57,7 +64,7 @@ sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph
                 if (distance_through_u < min_distance[v]) 
                 {
                     if (min_distance[v] != max_weight) 
-                    { // avoid spurious search
+                    {   // avoid spurious search
                         vertex_queue.erase(std::make_pair(min_distance[v], v));
                     }
         
@@ -77,14 +84,15 @@ sp::dijkstra::compute_path(const int source_ind, const int dest_ind, const graph
         unvisited_set[u] = false;
     }
 
-    std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-    std::chrono::duration<double> elapsed_seconds = end-start;
-
-    std::cout << "elapsed time: " << elapsed_seconds.count() << "s\n";
+    if (time_spent) {
+        *time_spent = tic() - start_time;
+    }
 }
 
 void
-sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std::vector<double>& min_distance, std::vector<int>& path_list)
+sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, 
+                            std::vector<double>& min_distance, std::vector<int>& path_list,
+                            comptime_t* time_spent)
 {
     const int n = node_list.size();
 
@@ -97,6 +105,11 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
     std::vector<bool> unvisited_set(n,true);
 
     vertex_queue.insert(std::make_pair(0.0, source_ind));
+
+    clocktime_t start_time;
+    if (time_spent) {
+        start_time = tic();
+    }
  
     while (!vertex_queue.empty())
     {
@@ -116,7 +129,7 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
                 if (distance_through_u < min_distance[v]) 
                 {
                     if (min_distance[v] != max_weight) 
-                    { // avoid spurious search
+                    {   // avoid spurious search
                         vertex_queue.erase(std::make_pair(min_distance[v], v));
                     }
         
@@ -129,6 +142,10 @@ sp::dijkstra::compute_paths(const int source_ind, const graph_t& node_list, std:
         }
 
         unvisited_set[u] = false;
+    }
+
+    if (time_spent) {
+        *time_spent = tic() - start_time;
     }
 }
 
@@ -166,7 +183,7 @@ sp::dijkstra::compute_paths_robust(const int source_ind, const graph_t& node_lis
             if (distance_through_u < min_distance[v]) 
             {
                 if (min_distance[v] != max_weight) 
-                { // avoid spurious search
+                {   // avoid spurious search
                     vertex_queue.erase(std::make_pair(min_distance[v], v));
                 }
     
