@@ -18,16 +18,17 @@
 
 inline
 void
-arma_to_graph(const int n_vert, arma::mat& arc_mat, graph_t& node_list)
+arma_to_graph(const llint_t n_vert, arma::mat& arc_mat, graph_t& node_list)
 {
     // const int k = graph_mat.n_cols;
 
     node_list.clear();
     node_list.resize(n_vert);
 
-    for (int i=0; i < static_cast<int>(arc_mat.n_rows); i++) {
-        int src_ind  = std::move(arc_mat(i,0)); // source
-        int dest_ind = std::move(arc_mat(i,1)); // destination
+    for (sp::llint_t i=0; i < static_cast<sp::llint_t>(arc_mat.n_rows); i++) 
+    {
+        sp::llint_t src_ind  = std::move(arc_mat(i,0)); // source
+        sp::llint_t dest_ind = std::move(arc_mat(i,1)); // destination
         double cost  = std::move(arc_mat(i,2));  // cost
 
         node_list[src_ind].push_back({std::move(dest_ind), std::move(cost)});
@@ -36,13 +37,11 @@ arma_to_graph(const int n_vert, arma::mat& arc_mat, graph_t& node_list)
 
 //
 
-std::list<int> get_shortest_path(int vertex, const std::vector<int>& path_list, const int min_vertex_val = -1);
-
 inline
-std::list<int>
-get_shortest_path(int vertex, const std::vector<int>& path_list, const int min_vertex_val)
+std::list<llint_t>
+get_shortest_path(llint_t vertex, const std::vector<sp::llint_t>& path_list, const llint_t min_vertex_val = -1L)
 {
-    std::list<int> path;
+    std::list<sp::llint_t> path;
 
     for ( ; vertex != min_vertex_val; vertex = path_list[vertex]) {
         path.push_front(vertex);

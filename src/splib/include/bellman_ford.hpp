@@ -18,8 +18,8 @@
 
 namespace bellman_ford {
 
-    void compute_paths(const int source_ind, const graph_t& node_list, 
-                       std::vector<double>& min_distance, std::vector<int>& path_list,
+    bool compute_paths(const llint_t source_ind, const graph_t& node_list, 
+                       std::vector<double>& min_distance, std::vector<llint_t>& path_list,
                        comptime_t* time_spent);
 
 }

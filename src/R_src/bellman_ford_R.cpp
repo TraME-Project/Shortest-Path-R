@@ -34,14 +34,14 @@ SEXP bellman_ford_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
         sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
 
         std::vector<double> min_distance;
-        std::vector<int> path_list;
+        std::vector<sp::llint_t> path_list;
         sp::comptime_t algo_runtime;
 
         sp::bellman_ford::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list, &algo_runtime);
 
         //
 
-        for (int i=0; i < path_list.size(); i++) {
+        for (sp::llint_t i=0; i < path_list.size(); i++) {
             path_list[i]++;
         }
 

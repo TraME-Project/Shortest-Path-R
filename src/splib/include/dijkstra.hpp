@@ -18,15 +18,15 @@
 
 namespace dijkstra {
 
-    void compute_path(const int source_ind, const int dest_ind, const graph_t& node_list, 
-                      std::vector<double>& min_distance, std::vector<int>& path_list, 
+    void compute_path(const llint_t source_ind, const llint_t dest_ind, const graph_t& node_list, 
+                      std::vector<double>& min_distance, std::vector<llint_t>& path_list, 
                       comptime_t* time_spent);
 
-    void compute_paths(const int source_ind, const graph_t& node_list, 
-                       std::vector<double>& min_distance, std::vector<int>& path_list,
+    void compute_paths(const llint_t source_ind, const graph_t& node_list, 
+                       std::vector<double>& min_distance, std::vector<llint_t>& path_list,
                        comptime_t* time_spent);
 
-    void compute_paths_robust(const int source_ind, const graph_t& node_list, 
-                              std::vector<double>& min_distance, std::vector<int>& path_list);
+    void compute_paths_robust(const llint_t source_ind, const graph_t& node_list, 
+                              std::vector<double>& min_distance, std::vector<llint_t>& path_list);
 
 }

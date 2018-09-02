@@ -31,17 +31,17 @@ SEXP dijkstra_R(SEXP n_R, SEXP source_ind_R, SEXP arcs_R)
         // arma::mat arcs_mat = as<arma::mat>(arcs_R);
         // arcs_mat.cols(0,1) -= 1; 
 
-        sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
+        sp::arma_to_graph(as<sp::llint_t>(n_R),arcs_mat,arc_list);
 
         std::vector<double> min_distance;
-        std::vector<int> path_list;
+        std::vector<sp::llint_t> path_list;
         sp::comptime_t algo_runtime;
 
-        sp::dijkstra::compute_paths(as<int>(source_ind_R), arc_list, min_distance, path_list, &algo_runtime);
+        sp::dijkstra::compute_paths(as<sp::llint_t>(source_ind_R), arc_list, min_distance, path_list, &algo_runtime);
 
         //
 
-        for (int i=0; i < path_list.size(); i++) {
+        for (sp::llint_t i=0; i < path_list.size(); i++) {
             path_list[i]++;
         }
 
@@ -63,16 +63,16 @@ SEXP dijkstra_simp_R(SEXP n_R, SEXP source_ind_R, SEXP dest_ind_R, SEXP arcs_R)
         sp::graph_t arc_list;
         arma::mat arcs_mat( REAL(arcs_R), Rf_nrows(arcs_R), Rf_ncols(arcs_R), false, true );
 
-        const int dest_ind = as<int>(dest_ind_R);
+        const sp::llint_t dest_ind = as<sp::llint_t>(dest_ind_R);
 
-        sp::arma_to_graph(as<int>(n_R),arcs_mat,arc_list);
+        sp::arma_to_graph(as<sp::llint_t>(n_R),arcs_mat,arc_list);
 
         std::vector<double> min_distance;
-        std::vector<int> path_list;
+        std::vector<sp::llint_t> path_list;
         sp::comptime_t algo_runtime;
 
-        sp::dijkstra::compute_path(as<int>(source_ind_R), dest_ind, arc_list, min_distance, path_list, &algo_runtime);
-        std::list<int> opt_path = sp::get_shortest_path(dest_ind, path_list);
+        sp::dijkstra::compute_path(as<sp::llint_t>(source_ind_R), dest_ind, arc_list, min_distance, path_list, &algo_runtime);
+        std::list<sp::llint_t> opt_path = sp::get_shortest_path(dest_ind, path_list);
 
         double runtime_out = algo_runtime.count();
 

@@ -26,7 +26,7 @@ SEXP get_shortest_path_R(SEXP dest_ind_R, SEXP path_list_R)
 {
     try {
 
-        std::list<int> opt_path = sp::get_shortest_path(as<int>(dest_ind_R), as< std::vector<int> > (path_list_R));
+        std::list<sp::llint_t> opt_path = sp::get_shortest_path(as<sp::llint_t>(dest_ind_R), as< std::vector<sp::llint_t>> (path_list_R));
 
         return wrap(opt_path);
     } catch( std::exception &ex ) {

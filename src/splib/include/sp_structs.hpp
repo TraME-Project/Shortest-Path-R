@@ -16,17 +16,20 @@
   ##
   ################################################################################*/
 
+using llint_t = long long int;
+
 // structures
 
-struct node_data {
-    int index;
+class node_data {
+  public:
+    llint_t index;
     double weight;
     
-    node_data(int arg_index, double arg_weight) : index(arg_index), weight(arg_weight) { }
+    node_data(llint_t arg_index, double arg_weight) : index(arg_index), weight(arg_weight) { }
 };
 
 // typedef convenience
 
-const double max_weight = std::numeric_limits<double>::infinity();
+static const double max_weight = std::numeric_limits<double>::infinity();
 
-typedef std::vector<std::vector<node_data>> graph_t;
+using graph_t = std::vector<std::vector<node_data>>;
